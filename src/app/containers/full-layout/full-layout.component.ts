@@ -1,4 +1,4 @@
-import { ChangeDetectionStrategy, Component, HostListener } from '@angular/core';
+import { ChangeDetectionStrategy, Component, HostListener, OnInit } from '@angular/core';
 
 @Component({
   selector: 'app-full-layout',
@@ -6,13 +6,29 @@ import { ChangeDetectionStrategy, Component, HostListener } from '@angular/core'
   templateUrl: './full-layout.component.html',
   styleUrls: ['./full-layout.component.scss'],
 })
-export class FullLayoutComponent {
+export class FullLayoutComponent implements OnInit {
 
-  isCollapsed = false;
-  hasCollapseBtn = true;
+  isMobile: boolean;
+  isCollapsed: boolean;
 
   @HostListener('window:resize', ['$event']) onResize() {
-    this.isCollapsed = window.innerWidth <= 992;
-    this.hasCollapseBtn = window.innerWidth > 992;
+    this.setMenuMode(window.innerWidth);
+  }
+
+  ngOnInit() {
+    this.setMenuMode(window.innerWidth);
+  }
+
+  setMenuMode(width) {
+    if (width <= 576) {
+      this.isMobile = true;
+      this.isCollapsed = true;
+    } else if (width > 576 && width < 922) {
+      this.isMobile = false;
+      this.isCollapsed = true;
+    } else {
+      this.isMobile = false;
+      this.isCollapsed = false;
+    }
   }
 }

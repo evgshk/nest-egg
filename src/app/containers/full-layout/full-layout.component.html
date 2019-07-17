@@ -1,5 +1,8 @@
-<nz-layout>
-  <nz-sider [nzCollapsible]="hasCollapseBtn" [(nzCollapsed)]="isCollapsed" nzWidth="200px">
+<nz-layout class="layout">
+  <nz-sider nzCollapsible
+            [nzCollapsedWidth]="isMobile ? 0 : 80"
+            [ngClass]="{'mobile-sider': isMobile}"
+            [(nzCollapsed)]="isCollapsed">
     <div class="logo"></div>
     <ul nz-menu nzTheme="dark" nzMode="inline" [nzInlineCollapsed]="isCollapsed">
       <li nz-submenu nzTitle="User" nzIcon="user">
@@ -23,12 +26,14 @@
   </nz-sider>
   <nz-layout>
     <nz-header></nz-header>
+    <nz-breadcrumb>
+      <nz-breadcrumb-item>User</nz-breadcrumb-item>
+      <nz-breadcrumb-item>Bill</nz-breadcrumb-item>
+    </nz-breadcrumb>
     <nz-content>
-      <nz-breadcrumb>
-        <nz-breadcrumb-item>User</nz-breadcrumb-item>
-        <nz-breadcrumb-item>Bill</nz-breadcrumb-item>
-      </nz-breadcrumb>
       <div class="inner-content">
+        <p>Collapse {{isCollapsed}}</p>
+        <p>Mobile {{isMobile}}</p>
         <router-outlet></router-outlet>
       </div>
     </nz-content>
