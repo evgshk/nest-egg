@@ -16,12 +16,13 @@
             </div>
         </div>
     </div>
-    <div nz-row>
+    <br>
+    <div style="display: flex; justify-content: space-between;">
         <h3 nz-title>Savings</h3>
         <nz-switch (click)="loadExchangeRatesForToday()"></nz-switch>
     </div>
     <div nz-row>
-        <nz-table #basicTable nzSize="small" [nzData]="dataSet">
+        <nz-table #basicTable nzNoResult="No data" nzSize="small" [nzData]="savings">
             <thead>
                 <tr>
                     <th>Date</th>
@@ -38,7 +39,7 @@
                 </tr>
             </thead>
             <tbody>
-                <tr *ngFor="let item of savings">
+                <tr *ngFor="let item of basicTable.data">
                     <td>{{item.date.seconds * 1000 | date: 'shortDate'}}</td>
                     <td>{{item.currency.code}}</td>
                     <td>{{item.type}}</td>
