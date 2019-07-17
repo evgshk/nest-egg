@@ -1,5 +1,26 @@
-nz-layout {
-  height: 100vh;
+nz-header {
+  background: #fff;
+  padding: 0;
+}
+
+nz-breadcrumb {
+  margin: 10px 16px;
+}
+
+nz-content {
+  margin: 0 16px;
+}
+
+nz-footer {
+  text-align: center;
+}
+
+nz-sider {
+  min-height: 100vh;
+}
+
+.layout {
+  min-height: 100vh;
 }
 
 .logo {
@@ -8,25 +29,12 @@ nz-layout {
   margin: 16px;
 }
 
-nz-header {
-  background: #fff;
-  padding: 0;
-}
-
-nz-content {
-  margin: 0 16px;
-}
-
-nz-breadcrumb {
-  margin: 16px 0;
-}
-
 .inner-content {
   padding: 24px;
   background: #fff;
   min-height: 360px;
 }
 
-nz-footer {
-  text-align: center;
+.mobile-sider {
+  position: absolute;
 }
