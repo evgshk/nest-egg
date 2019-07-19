@@ -4,9 +4,8 @@
 
 export const environment = {
   production: false,
-  baseUrl: '',
-  exchangeApiKey: '',
-  firebaseConfig: {}
+  apiUrl: '',
+  exchangeApiKey: ''
 };
 
 /*

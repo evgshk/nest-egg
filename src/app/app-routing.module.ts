@@ -1,7 +1,7 @@
 import { NgModule }             from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
-import { FullLayoutComponent }  from './containers/full-layout/full-layout.component';
-import { DashboardComponent }   from './views/dashboard/dashboard.component';
+import { FullLayoutComponent }  from '@containers/full-layout/full-layout.component';
+import { DashboardComponent }   from '@views/dashboard/dashboard.component';
 
 const routes: Routes = [
   {path: '', redirectTo: 'dashboard', pathMatch: 'full'},
