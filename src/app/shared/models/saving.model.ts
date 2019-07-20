@@ -1,10 +1,9 @@
-import { DocumentReference } from '@angular/fire/firestore';
+import { Currency } from './currency.model';
 
 export class Saving {
   id: string;
   date: firebase.firestore.Timestamp;
-  currency: DocumentReference;
-  currencyRef: string;
+  currency: Currency;
   type: string;
   amount: number;
   exchangeRate: number;

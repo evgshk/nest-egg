@@ -1,6 +1,6 @@
 import { ChangeDetectionStrategy, Component, OnInit } from '@angular/core';
-import { Saving, SavingTotals, ExchangeRate }         from '@shared/models';
-import { FirebaseService }                            from '@shared/services';
+import { Saving, SavingTotals, ExchangeRate } from '@shared/models';
+import { SavingService, ExchangeRateService, CurrencyService } from '@shared/services';
 
 @Component({
   selector: 'app-dashboard',
@@ -16,7 +16,9 @@ export class DashboardComponent implements OnInit {
   exchangeRate: ExchangeRate = new ExchangeRate();
 
   constructor(
-    private firebaseService: FirebaseService
+    private savingService: SavingService,
+    private exchangeRateService: ExchangeRateService,
+    private currencyService: CurrencyService
   ) {
   }
 
@@ -25,22 +27,22 @@ export class DashboardComponent implements OnInit {
   }
 
   getSavings(): void {
-    this.firebaseService.getSavings()
+    this.savingService.getItems()
       .subscribe((result: Saving[]) => this.savings = result);
   }
 
-  loadExchangeRatesForToday() {
+  loadExchangeRatesForToday(): void {
     this.isDetailedViewEnabled = !this.isDetailedViewEnabled;
 
     if (this.isDetailedViewEnabled && !this.exchangeRate.value) {
       const date = new Date();
       date.setHours(0, 0, 0, 0);
 
-      this.firebaseService.getExchangeRate(date)
+      this.exchangeRateService.getItemByDate(date)
         .subscribe(
           (result: ExchangeRate[]) => {
             this.exchangeRate = result[0];
-            this.savings.forEach(x => 
+            this.savings.forEach(x =>
               x.exchangeRateToday = x.exchangeRate !== 1 ? this.exchangeRate.value : 1);
           });
     }
