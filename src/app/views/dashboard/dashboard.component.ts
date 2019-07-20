@@ -24,27 +24,9 @@ export class DashboardComponent implements OnInit {
     this.getSavings();
   }
 
-  getSavings() {
+  getSavings(): void {
     this.firebaseService.getSavings()
-      .subscribe(res => {
-        this.savings = res;
-        const totalsResultByCurrency = new Array<SavingTotals>();
-        this.savings.reduce(function (result, value) {
-          if (!result[value.currencyRef]) {
-            result[value.currencyRef] = {currencyRef: value.currencyRef, currency: value.currency, value: 0, total: 0};
-            totalsResultByCurrency.push(result[value.currencyRef]);
-          }
-          result[value.currencyRef].value += value.amount;
-          result[value.currencyRef].total += value.amount * value.exchangeRate;
-          return result;
-        });
-
-        let savingTotalsRub = 0;
-        this.savings.forEach(x => savingTotalsRub += x.amount * x.exchangeRate);
-
-        this.savingTotalsRub = savingTotalsRub;
-        this.savingTotalsByCurrency = totalsResultByCurrency;
-      });
+      .subscribe((result: Saving[]) => this.savings = result);
   }
 
   loadExchangeRatesForToday() {
@@ -56,9 +38,10 @@ export class DashboardComponent implements OnInit {
 
       this.firebaseService.getExchangeRate(date)
         .subscribe(
-          result => {
+          (result: ExchangeRate[]) => {
             this.exchangeRate = result[0];
-            this.savings.forEach(x => x.exchangeRateToday = x.exchangeRate !== 1 ? this.exchangeRate.value : 1);
+            this.savings.forEach(x => 
+              x.exchangeRateToday = x.exchangeRate !== 1 ? this.exchangeRate.value : 1);
           });
     }
   }
