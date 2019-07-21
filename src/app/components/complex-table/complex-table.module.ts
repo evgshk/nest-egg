@@ -14,6 +14,7 @@ import {
   FilterDateRangeComponent,
   FilterSearchTextComponent
 }                                from './filters';
+import { NumberToFixedPipe }     from './pipes';
 
 const ANT_DESIGN_MODULES = [
   NzButtonModule,
@@ -31,7 +32,7 @@ const FILTERS_LIST = [
 ];
 
 @NgModule({
-  declarations: [ComplexTableComponent, ...FILTERS_LIST],
+  declarations: [ComplexTableComponent, NumberToFixedPipe, ...FILTERS_LIST],
   imports: [CommonModule, FormsModule, RouterModule, ...ANT_DESIGN_MODULES],
   exports: [ComplexTableComponent, ...FILTERS_LIST, ...ANT_DESIGN_MODULES]
 })

@@ -47,7 +47,7 @@
         <ng-container [ngSwitch]="headersList[settingItem.id].type">
           <ng-container *ngSwitchCase="'seconds'">{{item[settingItem.id] * 1000 | date: 'shortDate'}}</ng-container>
           <ng-container *ngSwitchCase="'date'">{{item[settingItem.id] | date: 'shortDate'}}</ng-container>
-          <ng-container *ngSwitchCase="'todoNumber'">{{item[settingItem.id] | number:'1.2'}}</ng-container>
+          <ng-container *ngSwitchCase="'rounded-number'">{{item[settingItem.id] | numberToFixed: 2}}</ng-container>
           <ng-container *ngSwitchCase="'rubles'">
             {{item[settingItem.id] | currency:'RUB':'symbol':'4.2-2':'ru'}}
           </ng-container>

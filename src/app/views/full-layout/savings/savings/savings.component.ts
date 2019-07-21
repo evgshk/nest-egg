@@ -7,12 +7,12 @@ const SAVINGS_TABLE = {
     dateSeconds: {label: 'Date', type: 'seconds', isSortable: true},
     currencyCode: {label: 'Currency', isSortable: true},
     type: {label: 'Type', isSortable: true},
-    amount: {label: 'Amount', type: 'todoNumber', isSortable: true},
-    exchangeRate: {label: 'Rate', type: 'todoNumber', isSortable: true},
-    total: {label: 'Total', type: 'todoNumber', isSortable: true},
-    exchangeRateToday: {label: 'Rate Today', type: 'todoNumber', isSortable: true},
-    totalToday: {label: 'Total Today', type: 'todoNumber', isSortable: true},
-    diff: {label: 'Diff', type: 'todoNumber', isSortable: true}
+    amount: {label: 'Amount', type: 'rounded-number', isSortable: true},
+    exchangeRate: {label: 'Rate', type: 'rounded-number', isSortable: true},
+    total: {label: 'Total', type: 'rounded-number', isSortable: true},
+    exchangeRateToday: {label: 'Rate Today', type: 'rounded-number', isSortable: true},
+    totalToday: {label: 'Total Today', type: 'rounded-number', isSortable: true},
+    diff: {label: 'Diff', type: 'rounded-number', isSortable: true}
   }
 };
 
@@ -35,11 +35,11 @@ export class SavingsComponent extends SavingsAbstract implements OnInit {
       isShown: x === 'id' ? true : SAVINGS_TABLE['headers'][x]['isShown'] !== false,
     }));
 
-
-  // exchangeRate: ExchangeRate = new ExchangeRate();
+  exchangeRate = new ExchangeRate();
 
   ngOnInit() {
     this.getSavings();
+    this.getExchangeRatesForToday();
   }
 
   getSavings(): void {
@@ -59,16 +59,18 @@ export class SavingsComponent extends SavingsAbstract implements OnInit {
       });
   }
 
-  // loadExchangeRatesForToday() {
-  //   this.isDetailedViewEnabled = !this.isDetailedViewEnabled;
-  //   if (this.isDetailedViewEnabled && !this.exchangeRate.value) {
-  //     const date = new Date();
-  //     date.setHours(0, 0, 0, 0);
-  //     this.exchangeRateService.getItemByDate(date)
-  //       .subscribe((result: ExchangeRate[]) => {
-  //         this.exchangeRate = result[0];
-  //         this.savings.forEach(x => x.exchangeRateToday = x.exchangeRate !== 1 ? this.exchangeRate.value : 1);
-  //       });
-  //   }
-  // }
+  getExchangeRatesForToday() {
+    const date = new Date();
+    date.setHours(0, 0, 0, 0);
+    this.exchangeRateService.getItemByDate(date)
+      .subscribe((result: ExchangeRate[]) => {
+        this.exchangeRate = result[0];
+        this.listOfInitialData.forEach(x => ({
+          ...x,
+          exchangeRateToday: x.exchangeRate !== 1 ? this.exchangeRate.value : 1,
+          totalToday: x.amount * x.exchangeRateToday,
+          diff: x.amount * x.exchangeRateToday - x.amount * x.exchangeRate
+        }));
+      });
+  }
 }
