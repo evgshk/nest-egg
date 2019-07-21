@@ -1,6 +1,43 @@
 @import '~node_modules/ng-zorro-antd/ng-zorro-antd';
 
+.ant-select-sm .ant-select-selection--single {
+  min-width: 70px;
+}
+
+.ant-table-filter-icon:before {
+  position: absolute;
+  top: calc(50% - 6px);
+  left: calc(50% - 6px);
+}
+
+.ant-table-column-title {
+  position: inherit !important;
+}
+
+.ant-table-small > .ant-table-content > .ant-table-body {
+  margin-left: 0 !important;
+  margin-right: 0 !important;
+}
+
 .ant-layout-sider-zero-width-trigger {
   position: absolute;
-  top: 92px;
+  top: 50px;
+}
+
+.ant-table-filter-icon:before {
+  position: absolute;
+  top: calc(50% - 6px);
+  left: calc(50% - 6px);
+}
+
+.ant-checkbox-wrapper + .ant-checkbox-wrapper {
+  margin-left: 0;
+}
+
+.ant-checkbox-wrapper {
+  display: block;
+}
+
+.anticon {
+  vertical-align: 2px;
 }

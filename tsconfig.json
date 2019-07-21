@@ -29,11 +29,17 @@
       "@containers/*": [
         "src/app/containers/*"
       ],
-      "@environments/*": [
-        "src/environments/*"
+      "@components/*": [
+        "src/app/components/*"
       ],
       "@models/*": [
         "src/app/models/*"
+      ],
+      "@environments/*": [
+        "src/environments/*"
+      ],
+      "@firebase/*": [
+        "src/firebase/*"
       ]
     }
   }

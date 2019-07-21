@@ -16,17 +16,17 @@ export class LoginComponent {
 
   tryFacebookLogin() {
     this.authService.doFacebookLogin()
-      .then(() => this.router.navigate(['/user']));
+      .then(() => this.router.navigate(['user']));
   }
 
   tryTwitterLogin() {
     this.authService.doTwitterLogin()
-      .then(() => this.router.navigate(['/user']));
+      .then(() => this.router.navigate(['user']));
   }
 
   tryGoogleLogin() {
     this.authService.doGoogleLogin()
-      .then(() => this.router.navigate(['/user']));
+      .then(() => this.router.navigate(['user']));
   }
 
 }

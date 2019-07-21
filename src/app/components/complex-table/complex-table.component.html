@@ -1,0 +1,68 @@
+<nz-table *ngIf="settingsList else noDataTmp"
+          nzSize="small" nzBordered nzNoResult="No data"
+          nzShowSizeChanger
+          nzHideOnSinglePage="true"
+          [nzScroll]="{ x: '100px' }"
+          [nzData]="listOfSortedFilteredData"
+          [(nzPageSize)]="pageSize"
+          (nzPageIndexChange)="paginationHandle(false, $event)"
+          (nzPageSizeChange)="paginationHandle(true)">
+  <thead (nzSortChange)="sort($event)" nzSingleSort>
+  <tr>
+    <th *ngIf="hasIdNavigation" nzLeft="0px" nzWidth="1%" class="text-center"></th>
+    <ng-container *ngFor="let settingItem of settingsList">
+      <th *ngIf="settingItem['isShown']"
+          class="text-{{settingItem.align}}"
+          [nzWidth]="settingItem.width+ '%'"
+          [nzShowSort]="headersList[settingItem.id].isSortable"
+          [nzSortKey]="settingItem.id"> {{headersList[settingItem.id].label}}
+        <div *ngIf="headersList[settingItem.id].filter" class="filter-icon-position">
+          <ng-container [ngSwitch]="headersList[settingItem.id].filter.type">
+            <app-filter-list *ngSwitchCase="'list'"
+                             [filterOptions]="headersList[settingItem.id]['filter']['list']"
+                             (filterList)="onFilter(settingItem.id, $event, 'list')">
+            </app-filter-list>
+            <app-filter-date-range *ngSwitchCase="'date-range'"
+                                   (dateRangeList)="onFilter(settingItem.id, $event, 'date-range')">
+            </app-filter-date-range>
+            <app-filter-search-text *ngSwitchCase="'text-search'"
+                                    [placeholder]="headersList[settingItem.id]['filter']['placeholder']"
+                                    (searchList)="onFilter(settingItem.id, $event, 'search-text')">
+            </app-filter-search-text>
+          </ng-container>
+        </div>
+      </th>
+    </ng-container>
+  </tr>
+  </thead>
+  <tbody>
+  <tr *ngFor="let item of listOfDisplayData">
+    <td *ngIf="hasIdNavigation"
+        nzLeft="0px" class="cursor-pointer"
+        [routerLink]="[item['id']]">
+      <i class="icon-share-alt"></i>
+    </td>
+    <ng-container *ngFor="let settingItem of settingsList">
+      <td *ngIf="settingItem['isShown']" class="text-{{settingItem.align}}">
+        <ng-container [ngSwitch]="headersList[settingItem.id].type">
+          <ng-container *ngSwitchCase="'seconds'">{{item[settingItem.id] * 1000 | date: 'shortDate'}}</ng-container>
+          <ng-container *ngSwitchCase="'date'">{{item[settingItem.id] | date: 'shortDate'}}</ng-container>
+          <ng-container *ngSwitchCase="'rounded-number'">{{item[settingItem.id] | numberToFixed: 2}}</ng-container>
+          <ng-container *ngSwitchCase="'rubles'">
+            {{item[settingItem.id] | currency:'RUB':'symbol':'4.2-2':'ru'}}
+          </ng-container>
+
+          <ng-container *ngSwitchDefault>{{item[settingItem.id]}}</ng-container>
+        </ng-container>
+      </td>
+    </ng-container>
+  </tr>
+  </tbody>
+</nz-table>
+
+
+<ng-template #noDataTmp>
+  <p class="text-center text-warning">
+    <i class="fa fa-clock-o mr-1"></i> No data to display
+  </p>
+</ng-template>
