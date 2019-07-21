@@ -10,7 +10,7 @@ const routes: Routes = [
   {path: '', redirectTo: 'login', pathMatch: 'full'},
   {path: 'login', component: LoginComponent, canActivate: [AuthGuardService]},
   {
-    path: 'main', component: FullLayoutComponent,
+    path: '', component: FullLayoutComponent,
     children: [
       {path: 'dashboard', loadChildren: () => import('./views/full-layout/dashboard/dashboard.module').then(m => m.DashboardModule)},
       {path: 'savings', loadChildren: () => import('./views/full-layout/savings/savings.module').then(m => m.SavingsModule)},

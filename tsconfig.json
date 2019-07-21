@@ -32,11 +32,14 @@
       "@components/*": [
         "src/app/components/*"
       ],
+      "@models/*": [
+        "src/app/models/*"
+      ],
       "@environments/*": [
         "src/environments/*"
       ],
-      "@models/*": [
-        "src/app/models/*"
+      "@firebase/*": [
+        "src/firebase/*"
       ]
     }
   }

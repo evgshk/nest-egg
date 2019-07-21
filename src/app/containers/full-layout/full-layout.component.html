@@ -7,13 +7,13 @@
     <div class="logo"></div>
     <ul nz-menu nzTheme="dark" [nzInlineCollapsed]="isCollapsed">
       <li nz-menu-item nzMatchRouter>
-        <a [routerLink]="['/main', 'dashboard']">
+        <a [routerLink]="['/dashboard']">
           <i nz-icon nzType="dashboard"></i>
           <span *ngIf="!isCollapsed">Dashboard</span>
         </a>
       </li>
       <li nz-menu-item nzMatchRouter>
-        <a [routerLink]="['/main', 'savings']">
+        <a [routerLink]="['/savings']">
           <i nz-icon nzType="file"></i>
           <span *ngIf="!isCollapsed">Savings</span>
         </a>
