@@ -2,40 +2,29 @@
   <nz-sider nzCollapsible
             [nzCollapsedWidth]="isMobile ? 0 : 80"
             [ngClass]="{'mobile-sider': isMobile}"
-            [(nzCollapsed)]="isCollapsed">
+            [nzCollapsed]="isCollapsed"
+            (nzCollapsedChange)="onCollapseChange($event)">
     <div class="logo"></div>
-    <ul nz-menu nzTheme="dark" nzMode="inline" [nzInlineCollapsed]="isCollapsed">
-      <li nz-submenu nzTitle="User" nzIcon="user">
-        <ul>
-          <li nz-menu-item>Tom</li>
-          <li nz-menu-item>Bill</li>
-          <li nz-menu-item>Alex</li>
-        </ul>
+    <ul nz-menu nzTheme="dark" [nzInlineCollapsed]="isCollapsed">
+      <li nz-menu-item nzMatchRouter>
+        <a [routerLink]="['/dashboard']">
+          <i nz-icon nzType="dashboard"></i>
+          <span *ngIf="!isCollapsed">Dashboard</span>
+        </a>
       </li>
-      <li nz-submenu nzTitle="Team" nzIcon="team">
-        <ul>
-          <li nz-menu-item>Team 1</li>
-          <li nz-menu-item>Team 2</li>
-        </ul>
-      </li>
-      <li nz-menu-item>
-        <i nz-icon nzType="file"></i>
-        <span>File</span>
+      <li nz-menu-item nzMatchRouter>
+        <a [routerLink]="['/savings']">
+          <i nz-icon nzType="file"></i>
+          <span *ngIf="!isCollapsed">Savings</span>
+        </a>
       </li>
     </ul>
   </nz-sider>
   <nz-layout>
     <nz-header></nz-header>
-    <nz-breadcrumb>
-      <nz-breadcrumb-item>User</nz-breadcrumb-item>
-      <nz-breadcrumb-item>Bill</nz-breadcrumb-item>
-    </nz-breadcrumb>
-    <nz-content>
-      <div class="inner-content">
-        <p>Collapse {{isCollapsed}}</p>
-        <p>Mobile {{isMobile}}</p>
-        <router-outlet></router-outlet>
-      </div>
+    <nz-content class="position-relative p-3">
+      <router-outlet></router-outlet>
+      <app-spinner></app-spinner>
     </nz-content>
     <nz-footer>Ant Design ©2019 Implement By Angular</nz-footer>
   </nz-layout>

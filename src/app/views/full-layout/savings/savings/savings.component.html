@@ -1,0 +1,17 @@
+<div *ngIf="!isLoading" class="animated fadeIn">
+  <div class="card">
+    <div class="card-body pt-4">
+
+      <div class="d-flex justify-content-between flex-wrap mb-3">
+        <h4 class="text-primary mb-0">Savings</h4>
+        <app-settings-list [(settingsList)]="settingsList"></app-settings-list>
+      </div>
+      <app-complex-table [headersList]="headersList"
+                         [listOfInitialData]="listOfInitialData"
+                         [settingsList]="settingsList"
+                         [hasIdNavigation]="false">
+      </app-complex-table>
+
+    </div>
+  </div>
+</div>
