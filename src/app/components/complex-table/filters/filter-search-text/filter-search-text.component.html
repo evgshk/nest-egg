@@ -1,0 +1,19 @@
+<nz-dropdown nzTableFilter nzTrigger="click"
+             [nzVisible]="isVisible"
+             (nzVisibleChange)="isVisible=!isVisible">
+  <i nz-dropdown class="icon-magnifier ant-table-filter-icon"
+     [ngClass]="{'active-filter': !isVisible && search.length}"
+     (click)="isVisible=true">
+  </i>
+  <div class="p-3">
+    <div class="form-group" style="max-width: 280px">
+      <input nz-input [placeholder]="placeholder" [(ngModel)]="search"/>
+    </div>
+    <div class="overflow-hidden">
+      <div class="float-right">
+        <button nz-button nzSize="small" nzType="primary" (click)="filter()"> Filter</button>
+        <button nz-button nzSize="small" class="ml-2" (click)="reset()"> Reset</button>
+      </div>
+    </div>
+  </div>
+</nz-dropdown>

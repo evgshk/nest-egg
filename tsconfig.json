@@ -18,6 +18,29 @@
     "lib": [
       "es2018",
       "dom"
-    ]
+    ],
+    "paths": {
+      "@shared/*": [
+        "src/app/shared/*"
+      ],
+      "@views/*": [
+        "src/app/views/*"
+      ],
+      "@containers/*": [
+        "src/app/containers/*"
+      ],
+      "@components/*": [
+        "src/app/components/*"
+      ],
+      "@models/*": [
+        "src/app/models/*"
+      ],
+      "@environments/*": [
+        "src/environments/*"
+      ],
+      "@firebase/*": [
+        "src/firebase/*"
+      ]
+    }
   }
 }

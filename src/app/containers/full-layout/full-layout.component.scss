@@ -7,10 +7,6 @@ nz-breadcrumb {
   margin: 10px 16px;
 }
 
-nz-content {
-  margin: 0 16px;
-}
-
 nz-footer {
   text-align: center;
 }
@@ -29,12 +25,7 @@ nz-sider {
   margin: 16px;
 }
 
-.inner-content {
-  padding: 24px;
-  background: #fff;
-  min-height: 360px;
-}
-
 .mobile-sider {
   position: absolute;
+  z-index: 1;
 }

@@ -32,8 +32,9 @@
               }
             ],
             "styles": [
-              "src/styles.scss",
-              "src/styles/customize-and-design.less"
+              "src/styles/custom-styles.scss",
+              "src/styles/customize-and-design.less",
+              "src/styles/customize-bootstrap.scss"
             ],
             "scripts": []
           },
