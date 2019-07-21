@@ -1,8 +1,7 @@
-import { Injectable } from '@angular/core';
+import { Injectable }       from '@angular/core';
 import { AngularFirestore } from '@angular/fire/firestore';
-import { Saving } from '@shared/models';
-import { Observable } from 'rxjs';
-import * as firebase from 'firebase';
+import { Saving }           from '@shared/models';
+import { Observable }       from 'rxjs';
 
 @Injectable({
   providedIn: 'root'
@@ -16,8 +15,7 @@ export class SavingService {
 
   getItems(): Observable<Saving[]> {
     return this.db
-      .collection<Saving>('savings', ref => ref
-        .orderBy('date', 'desc'))
+      .collection<Saving>('savings', ref => ref.orderBy('date', 'desc'))
       .valueChanges();
   }
 

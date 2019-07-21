@@ -29,6 +29,9 @@
       "@containers/*": [
         "src/app/containers/*"
       ],
+      "@components/*": [
+        "src/app/components/*"
+      ],
       "@environments/*": [
         "src/environments/*"
       ],

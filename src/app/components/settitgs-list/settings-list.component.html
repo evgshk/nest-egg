@@ -1,0 +1,70 @@
+<button nz-tooltip nzTitle="List settings"
+        class="btn btn-outline-dark btn-sm align-self-end"
+        (click)="isSettingsVisible = true">
+  <i nz-icon nzType="setting"></i>
+</button>
+
+
+<nz-modal nzTitle="Table edit"
+          [nzCancelText]="null"
+          [nzBodyStyle]="{'overflow-y': 'auto', 'height': '600px'}"
+          [(nzVisible)]="isSettingsVisible"
+          (nzOnCancel)="isSettingsVisible = false"
+          (nzOnOk)="isSettingsVisible = false">
+  <nz-table nzSize="small" nzBordered
+            nzFrontPagination="false"
+            nzShowPagination="false"
+            [nzData]="settingsList">
+    <thead>
+    <tr>
+      <th nzWidth="1%"></th>
+      <th nzWidth="1%">Name</th>
+      <th nzWidth="1%">Width</th>
+      <th nzWidth="1%">Align</th>
+    </tr>
+    </thead>
+    <tbody *ngIf="hasIdNavigation">
+    <tr>
+      <td><label nz-checkbox [(ngModel)]="firstItem.isShown" [disabled]="firstItem.isDisabled"></label></td>
+      <td>{{firstItem.title}}</td>
+      <td>
+        <nz-input-number [(ngModel)]="firstItem.width"
+                         nzSize="small" nzMin="1" nzMax="100" nzStep="1"
+                         [nzDisabled]="true"
+                         [nzFormatter]="formatterPercent"
+                         [nzParser]="parserPercent">
+        </nz-input-number>
+      </td>
+      <td>
+        <nz-select nzShowSearch nzSize="small" [(ngModel)]="firstItem.align">
+          <nz-option nzLabel="Left" nzValue="left"></nz-option>
+          <nz-option nzLabel="Center" nzValue="center"></nz-option>
+          <nz-option nzLabel="Right" nzValue="right"></nz-option>
+        </nz-select>
+      </td>
+    </tr>
+    </tbody>
+    <tbody cdkDropList (cdkDropListDropped)="drop($event)">
+    <tr *ngFor="let item of restItems"
+        cdkDrag style="cursor: pointer"
+        [cdkDragDisabled]="item.isDisabled">
+      <td><label nz-checkbox [(ngModel)]="item.isShown" [disabled]="item.isDisabled"></label></td>
+      <td>{{ item.title }}</td>
+      <td>
+        <nz-input-number [(ngModel)]="item.width"
+                         nzSize="small" nzMin="1" nzMax="100" nzStep="1"
+                         [nzFormatter]="formatterPercent"
+                         [nzParser]="parserPercent">
+        </nz-input-number>
+      </td>
+      <td>
+        <nz-select nzShowSearch nzSize="small" [(ngModel)]="item.align">
+          <nz-option nzLabel="Left" nzValue="left"></nz-option>
+          <nz-option nzLabel="Center" nzValue="center"></nz-option>
+          <nz-option nzLabel="Right" nzValue="right"></nz-option>
+        </nz-select>
+      </td>
+    </tr>
+    </tbody>
+  </nz-table>
+</nz-modal>

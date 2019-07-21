@@ -1,0 +1,25 @@
+<div class="animated fadeIn">
+  <div class="card">
+    <div class="card-body pt-4">
+
+      <div nz-row nzGutter="16">
+        <div *ngFor="let item of savingTotalsByCurrency"
+             nz-col class="gutter-row" nzSpan="6">
+          <div class="gutter-box">
+            <nz-card style="width:300px;">
+              <p>{{item.value | number:'1.2'}} = {{item.total | currency:'RUB':'symbol':'4.2-2':'ru'}}</p>
+            </nz-card>
+          </div>
+        </div>
+        <div nz-col class="gutter-row" nzSpan="6">
+          <div class="gutter-box">
+            <nz-card style="width:300px;">
+              <p>{{savingTotalsRub | currency:'RUB':'symbol':'4.2-2':'ru'}}</p>
+            </nz-card>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</div>
