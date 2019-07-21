@@ -30,7 +30,6 @@ export class SavingService {
     const documentRef = this.db
       .collection<Saving>('savings')
       .doc(id);
-      
     documentRef.set(obj);
 
     return id;

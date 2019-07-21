@@ -3,10 +3,10 @@ import * as firebase from 'firebase';
 
 export class Saving {
   id: string;
-  date: firebase.firestore.Timestamp = firebase.firestore.Timestamp.fromDate(new Date());
-  currency: Currency = new Currency();
-  type: string = '';
-  amount: number = 0;
-  exchangeRate: number = 0;
-  exchangeRateToday: number = 0;
+  date = firebase.firestore.Timestamp.fromDate(new Date());
+  currency = new Currency();
+  type = '';
+  amount = 0;
+  exchangeRate = 0;
+  exchangeRateToday = 0;
 }
