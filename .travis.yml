@@ -4,13 +4,10 @@ addons:
 
 language: node_js
 node_js:
-  - "8"
-
-branches:
-  only:
-    - master
+  - "10.9"
 
 before_script:
+  - echo "$FIREBASE_TOKEN"
   - npm install -g @angular/cli
   - npm install -g firebase-tools
 
@@ -20,4 +17,5 @@ script:
 deploy:
   provider: firebase
   token:
-    secure: "$FIREBASE_TOKEN"
+    secure: $FIREBASE_TOKEN
+    
