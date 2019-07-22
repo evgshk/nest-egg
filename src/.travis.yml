@@ -23,10 +23,11 @@ cache:
     - ./node_modules
 
 before_install:
+  - gem install bundler --pre
   - npm install -g firebase-tools
 
 install:
   - npm install
 
 script:
-  - npm run test -- --watch=false --no-progress --browsers=ChromeHeadlessNoSandbox
+  - npm run build --prod
