@@ -1,4 +1,5 @@
 [![Build Status](https://travis-ci.org/evgshk/nest-egg.svg?branch=master)](https://travis-ci.org/evgshk/nest-egg)
+[![Maintainability](https://api.codeclimate.com/v1/badges/163500d8ed098c5ab4e6/maintainability)](https://codeclimate.com/github/evgshk/nest-egg/maintainability)
 
 # Introduction 
 TODO: Give a short introduction to the project. Let this section explain the objectives or the motivation behind this project. 
