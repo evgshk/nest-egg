@@ -1,24 +1,41 @@
 <div class="container">
   <div class="row justify-content-md-center">
-    <form class="form-signin">
-      <br>
-      <h1 class="h3 mb-3 font-weight-normal" style="text-align: center"> Sign in to Nest Egg</h1>
-      <div class="social-login">
-        <button type="button" class="btn btn-primary" (click)="tryFacebookLogin()">Sign in with Facebook
-        </button>
-        <button type="button" class="btn btn-danger" (click)="tryGoogleLogin()" disabled>Sign in with Google
-        </button>
-      </div>
+      <div class="col col-lg-3">
+    <form nz-form [formGroup]="validateForm" class="login-form" (ngSubmit)="submitForm()">
+        <br>
+        <h1 class="h3 mb-3 font-weight-normal" style="text-align: center"> Sign in to Nest Egg</h1>
+      <nz-form-item>
+        <nz-form-control>
+          <button nz-button nzType="default" class="login-form-button" (click)="tryFacebookLogin()">
+            <i nz-icon nzType="facebook" nzTheme="outline"></i>
+            Sign in with Facebook
+          </button></nz-form-control>
+      </nz-form-item>
       <p style="text-align:center"> OR </p>
-      <input type="email" class="form-control" placeholder="Email address" disabled>
-      <input type="password" class="form-control" placeholder="Password" disabled>
-
-      <button class="btn btn-success btn-block" type="submit" disabled>Sign in</button>
-      <a href="#" disabled>Forgot password?</a>
-      <hr>
-      <p style="text-align:center" href="#" disabled>New to Nest Egg? <a href="#" id="forgot_pswd" disabled>Create an
-          account.</a></p>
-    </form>
-    <br>
+      <nz-form-item>
+        <nz-form-control nzErrorTip="Please input your username!">
+          <nz-input-group nzPrefixIcon="user">
+            <input type="text" nz-input formControlName="userName" placeholder="Username"/>
+          </nz-input-group>
+        </nz-form-control>
+      </nz-form-item>
+      <nz-form-item>
+        <nz-form-control nzErrorTip="Please input your Password!">
+          <nz-input-group nzPrefixIcon="lock">
+            <input type="password" nz-input formControlName="password" placeholder="Password" />
+          </nz-input-group>
+        </nz-form-control>
+      </nz-form-item>
+      <nz-form-item>
+        <nz-form-control>
+          <label nz-checkbox>
+            <span>Remember me</span>
+          </label>
+          <a href="#" class="login-form-forgot" class="login-form-forgot">Forgot password</a>
+          <button nz-button class="login-form-button" [nzType]="'primary'">Sign in</button>
+          <a href="#">Create an account.</a>
+        </nz-form-control>
+      </nz-form-item>
+    </form></div>
   </div>
 </div>
