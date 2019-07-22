@@ -24,3 +24,5 @@ deploy:
   provider: firebase
   token:
     secure: $FIREBASE_TOKEN
+  on:
+    all_branches: true
