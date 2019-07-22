@@ -1,4 +1,11 @@
 sudo: required
+
+# safelist
+branches:
+  only:
+  - master
+  - develop
+
 addons:
   chrome: stable
 
@@ -7,7 +14,6 @@ node_js:
   - "10.9"
 
 before_script:
-  - echo "$FIREBASE_TOKEN"
   - npm install -g @angular/cli
   - npm install -g firebase-tools
 
@@ -18,4 +24,3 @@ deploy:
   provider: firebase
   token:
     secure: $FIREBASE_TOKEN
-    
