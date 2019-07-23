@@ -1,54 +1,36 @@
-import { Component, OnInit }   from '@angular/core';
-import { Router }      from '@angular/router';
-import { AuthService } from '@shared/services/auth/auth.service';
-import { FormGroup, FormBuilder, Validators } from '@angular/forms';
+import { ChangeDetectionStrategy, Component } from '@angular/core';
+import { Router }                             from '@angular/router';
+import { FormControl, FormGroup, Validators } from '@angular/forms';
+import { AuthService }                        from '@shared/services/auth/auth.service';
+import { EMAIL_PATTERN, PASSWORD_PATTERN }    from '@components/app-reactive/reactive-lists/patterns';
+import { markAllFormFieldsAsTouched }         from '@components/app-reactive/reactive-functions/validation';
 
 @Component({
   selector: 'app-login',
+  changeDetection: ChangeDetectionStrategy.OnPush,
   templateUrl: 'login.component.html',
-  styles: [
-    `
-      .login-form {
-        max-width: 300px;
-      }
-
-      .login-form-forgot {
-        float: right;
-      }
-
-      .login-form-button {
-        width: 100%;
-      }
-    `
-  ]
+  styleUrls: ['./login.component.scss']
 })
-export class LoginComponent implements OnInit {
+export class LoginComponent {
 
-  remember = false;
-  validateForm: FormGroup;
-
-  submitForm(): void {
-    if (this.validateForm.controls) {
-      for (const i in this.validateForm.controls) {
-        this.validateForm.controls[i].markAsDirty();
-        this.validateForm.controls[i].updateValueAndValidity();
-      }
-    }
-  }
+  loginForm = new FormGroup({
+    userName: new FormControl(null, [Validators.required, Validators.pattern(EMAIL_PATTERN)]),
+    password: new FormControl(null, [Validators.required, Validators.pattern(PASSWORD_PATTERN)]),
+    isRemembered: new FormControl(null)
+  });
 
   constructor(
-    private fb: FormBuilder,
-    public authService: AuthService,
-    private router: Router
+    private router: Router,
+    private authService: AuthService
   ) {
   }
 
-  ngOnInit(): void {
-    this.validateForm = this.fb.group({
-      userName: [null, [Validators.required]],
-      password: [null, [Validators.required]],
-      remember: [true]
-    });
+  onSubmit() {
+    if (this.loginForm.valid) {
+      // todo add submit logic later
+    } else {
+      markAllFormFieldsAsTouched(this.loginForm);
+    }
   }
 
   tryFacebookLogin() {

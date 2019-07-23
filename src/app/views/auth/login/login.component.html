@@ -1,41 +1,41 @@
-<div class="container">
-  <div class="row justify-content-md-center">
-      <div class="col col-lg-3">
-    <form nz-form [formGroup]="validateForm" class="login-form" (ngSubmit)="submitForm()">
-        <br>
-        <h1 class="h3 mb-3 font-weight-normal" style="text-align: center"> Sign in to Nest Egg</h1>
-      <nz-form-item>
-        <nz-form-control>
-          <button nz-button nzType="default" class="login-form-button" (click)="tryFacebookLogin()">
-            <i nz-icon nzType="facebook" nzTheme="outline"></i>
-            Sign in with Facebook
-          </button></nz-form-control>
-      </nz-form-item>
-      <p style="text-align:center"> OR </p>
-      <nz-form-item>
-        <nz-form-control nzErrorTip="Please input your username!">
-          <nz-input-group nzPrefixIcon="user">
-            <input type="text" nz-input formControlName="userName" placeholder="Username"/>
-          </nz-input-group>
-        </nz-form-control>
-      </nz-form-item>
-      <nz-form-item>
-        <nz-form-control nzErrorTip="Please input your Password!">
-          <nz-input-group nzPrefixIcon="lock">
-            <input type="password" nz-input formControlName="password" placeholder="Password" />
-          </nz-input-group>
-        </nz-form-control>
-      </nz-form-item>
-      <nz-form-item>
-        <nz-form-control>
-          <label nz-checkbox>
-            <span>Remember me</span>
-          </label>
-          <a href="#" class="login-form-forgot" class="login-form-forgot">Forgot password</a>
-          <button nz-button class="login-form-button" [nzType]="'primary'">Sign in</button>
-          <a href="#">Create an account.</a>
-        </nz-form-control>
-      </nz-form-item>
-    </form></div>
+<div class="animated fadeIn">
+  <div class="container">
+
+    <div class="mx-auto login-form">
+      <h3 class="text-center font-weight-normal mb-3"> Sign in to Nest Egg </h3>
+      <button nz-button nzType="default"
+              class="w-100 mb-4"
+              (click)="tryFacebookLogin()">
+        <i nz-icon nzType="facebook" nzTheme="outline"></i> Sign in with Facebook
+      </button>
+      <p class="text-center text-muted"> OR </p>
+      <ng-container [ngTemplateOutlet]="loginFormTmp"></ng-container>
+    </div>
+
   </div>
 </div>
+
+
+<ng-template #loginFormTmp>
+  <form autocomplete="off" class="mb-3"
+        [formGroup]="loginForm">
+    <app-reactive-input fieldId="userName" label="Username" icon="user"
+                        [control]="loginForm.get('userName')">
+    </app-reactive-input>
+    <app-reactive-input fieldId="password" label="Password" icon="lock"
+                        tooltipMessage="Password must be at least 8 characters long, be of mixed case and also contain a digit or symbol. "
+                        [control]="loginForm.get('password')">
+    </app-reactive-input>
+    <app-reactive-check-box fieldId="isRemembered" label="Remember me"
+                            [control]="loginForm.get('isRemembered')">
+    </app-reactive-check-box>
+    <button nz-button nzType="primary"
+            class="w-100"
+            (click)="onSubmit()"> Sign in
+    </button>
+  </form>
+  <div class="d-flex justify-content-between">
+    <a href="#">Sign up</a>
+    <a href="#">Forgot password</a>
+  </div>
+</ng-template>
