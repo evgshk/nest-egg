@@ -1,0 +1,14 @@
+<div *ngIf="control" class="form-group position-relative">
+  <div class="overflow-hidden ml-1 text-nowrap">
+    <label [id]="fieldId"
+           [formControl]="control"
+           nz-checkbox>
+      <app-reactive-label [fieldId]="fieldId"
+                          [label]="label"
+                          [tooltipMessage]="tooltipMessage"
+                          [hasRequiredIndicator]="hasRequiredIndicator">
+      </app-reactive-label>
+    </label>
+  </div>
+  <app-validation-message [validationErrors]="validationErrors"></app-validation-message>
+</div>
