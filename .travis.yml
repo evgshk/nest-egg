@@ -14,6 +14,7 @@ node_js:
   - "10.9"
 
 before_script:
+  - echo "Test Travis CI"
   - npm install -g @angular/cli
   - npm install -g firebase-tools
 
