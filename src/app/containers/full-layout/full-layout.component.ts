@@ -1,6 +1,6 @@
-import { ChangeDetectionStrategy, ChangeDetectorRef, Component, HostListener, OnDestroy, OnInit } from '@angular/core';
-import { SiderService }                                                                           from '@shared/services';
-import { SubscriptionLike }                                                                       from 'rxjs';
+import { ChangeDetectionStrategy, ChangeDetectorRef, Component, HostListener, OnDestroy } from '@angular/core';
+import { SiderService }                                                                   from '@shared/services';
+import { SubscriptionLike }                                                               from 'rxjs';
 
 @Component({
   selector: 'app-full-layout',
@@ -8,7 +8,7 @@ import { SubscriptionLike }                                                     
   templateUrl: './full-layout.component.html',
   styleUrls: ['./full-layout.component.scss'],
 })
-export class FullLayoutComponent implements OnInit, OnDestroy {
+export class FullLayoutComponent implements OnDestroy {
 
   isMobile: boolean;
   isCollapsed: boolean;
@@ -23,12 +23,9 @@ export class FullLayoutComponent implements OnInit, OnDestroy {
     private cdr: ChangeDetectorRef,
     private siderService: SiderService
   ) {
+    this.setMenuMode(window.innerWidth);
     this.statusSubscription = this.siderService.status
       .subscribe(value => this.isCollapsed = value);
-  }
-
-  ngOnInit() {
-    this.setMenuMode(window.innerWidth);
   }
 
   ngOnDestroy() {
@@ -41,6 +38,12 @@ export class FullLayoutComponent implements OnInit, OnDestroy {
   onCollapseChange(event) {
     this.isCollapsed = event;
     this.siderService.isCollapsed(event);
+  }
+
+  onClick() {
+    if (this.isMobile) {
+      this.isCollapsed = !this.isCollapsed;
+    }
   }
 
   setMenuMode(width) {

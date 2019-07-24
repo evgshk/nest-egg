@@ -5,7 +5,9 @@
             [nzCollapsed]="isCollapsed"
             (nzCollapsedChange)="onCollapseChange($event)">
     <div class="logo"></div>
-    <ul nz-menu nzTheme="dark" [nzInlineCollapsed]="isCollapsed">
+    <ul nz-menu nzTheme="dark"
+        [nzInlineCollapsed]="isCollapsed"
+        (nzClick)="onClick()">
       <li nz-menu-item nzMatchRouter>
         <a [routerLink]="['/dashboard']">
           <i nz-icon nzType="dashboard"></i>
