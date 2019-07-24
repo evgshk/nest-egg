@@ -1,12 +1,17 @@
+<div class="overflow-hidden mb-2">
+  <nz-radio-group class="float-right" nzSize="small" nzButtonStyle="solid" [(ngModel)]="pageSize">
+    <label nz-radio-button [nzValue]="10" (click)="paginationHandle(true)">10</label>
+    <label nz-radio-button [nzValue]="50" (click)="paginationHandle(true)">50</label>
+    <label nz-radio-button [nzValue]="100" (click)="paginationHandle(true)">100</label>
+  </nz-radio-group>
+</div>
 <nz-table *ngIf="settingsList else noDataTmp"
           nzSize="small" nzBordered nzNoResult="No data"
-          nzShowSizeChanger
           nzHideOnSinglePage="true"
           [nzScroll]="{ x: '100px' }"
           [nzData]="listOfSortedFilteredData"
           [(nzPageSize)]="pageSize"
-          (nzPageIndexChange)="paginationHandle(false, $event)"
-          (nzPageSizeChange)="paginationHandle(true)">
+          (nzPageIndexChange)="paginationHandle(false, $event)">
   <thead (nzSortChange)="sort($event)" nzSingleSort>
   <tr>
     <th *ngIf="hasIdNavigation" nzLeft="0px" nzWidth="1%" class="text-center"></th>

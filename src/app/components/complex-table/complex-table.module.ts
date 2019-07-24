@@ -8,6 +8,7 @@ import { NzDatePickerModule }    from 'ng-zorro-antd/date-picker';
 import { NzTableModule }         from 'ng-zorro-antd/table';
 import { NzInputModule }         from 'ng-zorro-antd/input';
 import { NzDropDownModule }      from 'ng-zorro-antd/dropdown';
+import { NzRadioModule }         from 'ng-zorro-antd/radio';
 import { ComplexTableComponent } from './complex-table.component';
 import {
   FilterListComponent,
@@ -22,7 +23,8 @@ const ANT_DESIGN_MODULES = [
   NzDatePickerModule,
   NzDropDownModule,
   NzInputModule,
-  NzTableModule
+  NzTableModule,
+  NzRadioModule
 ];
 
 const FILTERS_LIST = [
