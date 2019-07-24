@@ -4,6 +4,7 @@ import { FullLayoutComponent }  from '@containers/full-layout/full-layout.compon
 import { LoginComponent }       from '@views/auth/login/login.component';
 import { UserComponent }        from '@views/full-layout/user/user.component';
 import { UserResolver }         from '@views/full-layout/user/user.resolver';
+import { NopComponent }         from '@views/nop';
 import { AuthGuardService }     from '@shared/services/auth/auth-guard.service';
 
 const routes: Routes = [
@@ -18,7 +19,8 @@ const routes: Routes = [
       // Possibly that's gonna be on other layout
       {path: 'user', component: UserComponent, resolve: {data: UserResolver}}
     ]
-  }
+  },
+  {path: '**', component: NopComponent}
 ];
 
 @NgModule({
