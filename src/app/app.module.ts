@@ -1,21 +1,20 @@
-import { BrowserModule } from '@angular/platform-browser';
-import { NgModule } from '@angular/core';
-import { HttpClientModule } from '@angular/common/http';
+import { NgModule }                from '@angular/core';
+import { BrowserModule }           from '@angular/platform-browser';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
-import { registerLocaleData } from '@angular/common';
-import en from '@angular/common/locales/en';
-import ru from '@angular/common/locales/ru';
-import { FormsModule, ReactiveFormsModule } from '@angular/forms';
-import { AngularFireModule } from '@angular/fire';
-import { AngularFirestoreModule } from '@angular/fire/firestore';
-import { AngularFireAuthModule } from '@angular/fire/auth';
-import { FullLayoutModule } from '@containers/full-layout/full-layout.module';
-import { UserComponent } from '@views/full-layout/user/user.component';
-import { firebaseConfig } from '@firebase/config';
-import { en_US, NZ_I18N } from 'ng-zorro-antd';
-import { AppComponent } from './app.component';
-import { AppRoutingModule } from './app-routing.module';
-import { LoginModule } from './../app/views/auth/login/login.module';
+import { HttpClientModule }        from '@angular/common/http';
+import { registerLocaleData }      from '@angular/common';
+import en                          from '@angular/common/locales/en';
+import ru                          from '@angular/common/locales/ru';
+import { AngularFireModule }       from '@angular/fire';
+import { AngularFirestoreModule }  from '@angular/fire/firestore';
+import { AngularFireAuthModule }   from '@angular/fire/auth';
+import { firebaseConfig }          from '@firebase/config';
+import { FullLayoutModule }        from '@containers/full-layout/full-layout.module';
+import { LoginModule }             from '@views/auth/login/login.module';
+import { NopModule }               from '@views/nop/nop.module';
+import { en_US, NZ_I18N }          from 'ng-zorro-antd/i18n';
+import { AppComponent }            from './app.component';
+import { AppRoutingModule }        from './app-routing.module';
 
 registerLocaleData(ru);
 registerLocaleData(en);
@@ -26,23 +25,23 @@ const FIRE_MODULES = [
   AngularFireAuthModule
 ];
 
+const COMPONENTS_MODULES = [
+  FullLayoutModule,
+  LoginModule,
+  NopModule
+];
+
 @NgModule({
-  declarations: [
-    AppComponent,
-    UserComponent
-  ],
   imports: [
-    ...FIRE_MODULES,
     AppRoutingModule,
-    FullLayoutModule,
-    FormsModule,
-    ReactiveFormsModule,
     BrowserModule,
     BrowserAnimationsModule,
     HttpClientModule,
-    LoginModule
+    ...COMPONENTS_MODULES,
+    ...FIRE_MODULES
   ],
-  providers: [{ provide: NZ_I18N, useValue: en_US }],
+  declarations: [AppComponent],
+  providers: [{provide: NZ_I18N, useValue: en_US}],
   bootstrap: [AppComponent]
 })
 export class AppModule {
