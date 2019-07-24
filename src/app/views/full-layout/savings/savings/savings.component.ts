@@ -42,7 +42,7 @@ export class SavingsComponent extends SavingsAbstract implements OnInit {
     this.getExchangeRatesForToday();
   }
 
-  getSavings(): void {
+  getSavings() {
     this.loadingService.isLoading(true);
     this.savingService.getItems()
       .subscribe(res => {
