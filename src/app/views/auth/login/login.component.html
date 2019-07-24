@@ -1,18 +1,16 @@
-<div class="animated fadeIn">
-  <div class="container">
+<div class="animated fadeIn overflow-hidden">
 
-    <div class="mx-auto login-form">
-      <h3 class="text-center font-weight-normal mb-3"> Sign in to Nest Egg </h3>
-      <button nz-button nzType="default"
-              class="w-100 mb-4"
-              (click)="tryFacebookLogin()">
-        <i nz-icon nzType="facebook" nzTheme="outline"></i> Sign in with Facebook
-      </button>
-      <p class="text-center text-muted"> OR </p>
-      <ng-container [ngTemplateOutlet]="loginFormTmp"></ng-container>
-    </div>
-
+  <div class="mx-auto border my-5 login-form">
+    <h3 class="text-center font-weight-normal mb-3"> Sign in to Nest Egg </h3>
+    <button nz-button nzType="default"
+            class="w-100 mb-4"
+            (click)="tryFacebookLogin()">
+      <i nz-icon nzType="facebook" nzTheme="outline"></i> Sign in with Facebook
+    </button>
+    <p class="text-center text-muted"> OR </p>
+    <ng-container [ngTemplateOutlet]="loginFormTmp"></ng-container>
   </div>
+
 </div>
 
 
