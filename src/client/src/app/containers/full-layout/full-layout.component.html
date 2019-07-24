@@ -1,13 +1,8 @@
 <nz-layout class="layout">
-  <nz-sider nzCollapsible
-            [nzCollapsedWidth]="isMobile ? 0 : 80"
-            [ngClass]="{'mobile-sider': isMobile}"
-            [nzCollapsed]="isCollapsed"
-            (nzCollapsedChange)="onCollapseChange($event)">
+  <nz-sider nzCollapsible [nzCollapsedWidth]="isMobile ? 0 : 80" [ngClass]="{'mobile-sider': isMobile}"
+    [nzCollapsed]="isCollapsed" (nzCollapsedChange)="onCollapseChange($event)">
     <div class="logo"></div>
-    <ul nz-menu nzTheme="dark"
-        [nzInlineCollapsed]="isCollapsed"
-        (nzClick)="onClick()">
+    <ul nz-menu nzTheme="dark" [nzInlineCollapsed]="isCollapsed" (nzClick)="onClick()">
       <li nz-menu-item nzMatchRouter>
         <a [routerLink]="['/dashboard']">
           <i nz-icon nzType="dashboard"></i>
@@ -18,6 +13,12 @@
         <a [routerLink]="['/savings']">
           <i nz-icon nzType="file"></i>
           <span *ngIf="!isCollapsed">Savings</span>
+        </a>
+      </li>
+      <li nz-menu-item nzMatchRouter>
+        <a [routerLink]="['/stocks']">
+          <i nz-icon nzType="file"></i>
+          <span *ngIf="!isCollapsed">Stocks</span>
         </a>
       </li>
     </ul>
