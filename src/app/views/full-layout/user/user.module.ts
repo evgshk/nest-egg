@@ -1,15 +1,14 @@
-import { NgModule }                                    from '@angular/core';
-import { CommonModule }                                from '@angular/common';
-import { FormsModule, ReactiveFormsModule }            from '@angular/forms';
-import { UserRoutingModule }                           from './user-routing.module';
-import { UserComponent }                               from './user/user.component';
+import { NgModule }               from '@angular/core';
+import { CommonModule }           from '@angular/common';
+import { AppReactiveFormsModule } from '@components/app-reactive/reactive-form/app-reactive-forms.module';
+import { UserRoutingModule }      from './user-routing.module';
+import { UserComponent }          from './user/user.component';
 
 @NgModule({
   imports: [
     UserRoutingModule,
     CommonModule,
-    FormsModule,
-    ReactiveFormsModule,
+    AppReactiveFormsModule
   ],
   declarations: [UserComponent]
 })

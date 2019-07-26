@@ -28,18 +28,18 @@ export class UserComponent implements OnInit {
         const data = res['data'];
         if (data) {
           this.user = data;
-          this.patchName(this.user.name);
+          this.nameControl.patchValue(this.user.name);
         }
       });
   }
 
-  patchName(name) {
-    this.nameControl.patchValue(name);
-  }
-
-  save(value) {
-    this.userService.updateCurrentUser(value)
-      .then(res => console.log(res), err => console.log(err));
+  onSubmit() {
+    if (this.nameControl.valid) {
+      this.userService.updateCurrentUser(this.nameControl.valid)
+        .then(res => console.log(res), err => console.log(err));
+    } else {
+      this.nameControl.markAsTouched();
+    }
   }
 
   logout() {
