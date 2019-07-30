@@ -1,8 +1,9 @@
-import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
-import { CdkDragDrop, moveItemInArray }                   from '@angular/cdk/drag-drop';
+import { ChangeDetectionStrategy, Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
+import { CdkDragDrop, moveItemInArray }                                            from '@angular/cdk/drag-drop';
 
 @Component({
   selector: 'app-settings-list',
+  changeDetection: ChangeDetectionStrategy.OnPush,
   templateUrl: './settings-list.component.html',
   styleUrls: ['./settings-list.component.scss']
 })
