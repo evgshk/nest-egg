@@ -23,17 +23,8 @@ const SAVINGS_TABLE = {
 })
 export class SavingsComponent extends SavingsAbstract implements OnInit {
 
-  headersList = SAVINGS_TABLE['headers'];
-  listOfInitialData: Saving[] = [];
-  settingsList = Object.keys(SAVINGS_TABLE['headers'])
-    .map(x => ({
-      id: x,
-      title: SAVINGS_TABLE['headers'][x]['label'],
-      align: SAVINGS_TABLE['headers'][x]['align'] || 'left',
-      width: SAVINGS_TABLE['headers'][x]['width'] || 'Auto',
-      isDisabled: x === 'id',
-      isShown: x === 'id' ? true : SAVINGS_TABLE['headers'][x]['isShown'] !== false,
-    }));
+  headers = SAVINGS_TABLE['headers'];
+  savingsList: Saving[] = [];
 
   exchangeRate = new ExchangeRate();
 
@@ -46,7 +37,7 @@ export class SavingsComponent extends SavingsAbstract implements OnInit {
     this.loadingService.isLoading(true);
     this.savingService.getItems()
       .subscribe(res => {
-        this.listOfInitialData = res && res.length ? res.map(x => ({
+        this.savingsList = res && res.length ? res.map(x => ({
           ...x,
           dateSeconds: x['date']['seconds'],
           currencyCode: x['currency']['code'],
@@ -65,7 +56,7 @@ export class SavingsComponent extends SavingsAbstract implements OnInit {
     this.exchangeRateService.getItemByDate(date)
       .subscribe((result: ExchangeRate[]) => {
         this.exchangeRate = result[0];
-        this.listOfInitialData.forEach(x => ({
+        this.savingsList.forEach(x => ({
           ...x,
           exchangeRateToday: x.exchangeRate !== 1 ? this.exchangeRate.value : 1,
           totalToday: x.amount * x.exchangeRateToday,
