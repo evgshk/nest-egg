@@ -1,14 +1,16 @@
 import { ChangeDetectionStrategy, Component, OnInit } from '@angular/core';
 import { StocksAbstract } from './../stocks-abstract';
 import { Observable, forkJoin } from 'rxjs';
+import { Stock } from '@shared/models/stock.model';
+import { RealtimePrice } from '@shared/models/stocks-api/realtime-price.model';
 
 const STOCKS_TABLE = {
   headers: {
-    label: {label: 'Label', type: 'text', isSortable: true},
-    price: {label: 'Price', type: 'rounded-number', isSortable: true},
-    amount: {label: 'Amount', type: 'rounded-number', isSortable: true},
-    total: {label: 'Total', type: 'rounded-number', isSortable: true},
-    diff: {label: 'Diff', type: 'rounded-number', isSortable: true}
+    label: { label: 'Label', type: 'text', isSortable: true },
+    price: { label: 'Buy price', type: 'rounded-number', isSortable: true },
+    amount: { label: 'Amount', type: 'rounded-number', isSortable: true },
+    total: { label: 'Total', type: 'rounded-number', isSortable: true },
+    diff: { label: 'Gain', type: 'diff', isSortable: true }
   }
 };
 
@@ -18,35 +20,40 @@ const STOCKS_TABLE = {
   templateUrl: 'stocks.component.html',
 })
 export class StocksComponent extends StocksAbstract implements OnInit {
-
-  
-
-  public labels = ['AAPL', 'NEE', 'J1PM', 'MSFT', 'MA', 'FB', 'DIS'];
-  public result: any[] = [];
-  data = [
-    'Racing car sprays burning fuel into crowd.',
-    'Japanese princess to wed commoner.',
-    'Australian walks 100km after outback crash.',
-    'Man charged over missing wedding girl.',
-    'Los Angeles battles huge wildfires.'
-  ];
+  public stockList: Stock[] = [];
+  public headers = STOCKS_TABLE['headers'];
 
   ngOnInit() {
-    // TODO - implemet data load
-    // this.loadLabelsHistory().subscribe(
-    //   responses => responses.forEach(
-    //     item => this.result.push(item))
-    // );
+    this.loadStocks();
   }
 
-  private loadLabelsHistory(): Observable<any[]> {
-    const responses = new Array<Observable<any>>();
-    const now = new Date();
-    const from = new Date(new Date().setDate(now.getDate() - 7));
-    const to = now;
+  private loadStocks() {
+    this.loadingService.isLoading(true);
+    this.stockService.getItems()
+      .subscribe(res => {
+        this.stockList = res;
+        const labels = this.stockList.map(x => x.label);
+        this.loadRealtimePrices(labels).subscribe(
+          responses => responses.forEach(
+            realtime => {
+              const row = this.stockList.filter(x => x.label === realtime.symbol)[0];
+              row.diff = realtime.price * row.amount - row.total;
+            }
+          ),
+          (e) => console.error(e),
+          () => {
+            this.loadingService.isLoading(false);
+            this.cdr.markForCheck();
+          }
+        );
+      });
+  }
 
-    this.labels.forEach(label => {
-      const response = this.stocksService.getHistoricalPrice(label, from, to);
+  private loadRealtimePrices(labels: string[]): Observable<RealtimePrice[]> {
+    const responses = new Array<Observable<RealtimePrice>>();
+
+    labels.forEach(item => {
+      const response = this.stocksService.getRealtimePrice(item);
       responses.push(response);
     });
 
