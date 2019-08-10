@@ -1,5 +1,5 @@
-import { ChangeDetectionStrategy, Component, Input, OnChanges } from '@angular/core';
-import { includes }                                             from 'lodash-es';
+import { ChangeDetectionStrategy, Component, EventEmitter, Input, OnChanges, Output, TemplateRef } from '@angular/core';
+import { includes }                                                                                from 'lodash-es';
 
 @Component({
   selector: 'app-complex-table',
@@ -12,12 +12,16 @@ export class ComplexTableComponent implements OnChanges {
   @Input() headers = {};
   @Input() listOfInitialData = [];
   @Input() hasIdNavigation = false;
+  @Input() addFormTmp: TemplateRef<string>;
+  @Output() onAddItem = new EventEmitter();
 
   filterConditionsList = [];
   settingsList = [];
 
   listOfSortedFilteredData = [];
   listOfDisplayData = [];
+
+  isAddModalVisible = false;
 
   curPage = 1;
   pageSize = 10;
@@ -36,6 +40,10 @@ export class ComplexTableComponent implements OnChanges {
       }));
     this.listOfSortedFilteredData = [...this.listOfInitialData];
     this.paginationHandle();
+  }
+
+  addItem() {
+    this.onAddItem.emit();
   }
 
   onFilter(prop, list, type) {

@@ -7,24 +7,22 @@ import { NzBadgeModule }                from 'ng-zorro-antd/badge';
 import { NzInputModule }                from 'ng-zorro-antd/input';
 import { NzCheckboxModule }             from 'ng-zorro-antd/checkbox';
 import { NzIconModule }                 from 'ng-zorro-antd/icon';
+import { NzDatePickerModule }           from 'ng-zorro-antd/date-picker';
 import { AppReactiveAbstractComponent } from './app-reactive-abstract.component';
 import { ValidationMessageComponent }   from './additional-decorations/validation-message';
 import {
   ReactiveLabelComponent,
   ReactiveSubLabelComponent,
   ReactiveCheckBoxComponent,
-  ReactiveInputComponent
+  ReactiveInputComponent,
+  ReactiveDatePickerComponent
 }                                       from './index';
 import { OnInputValueControlDirective } from '../reactive-directives';
 import { ValueTransformPipe }           from '../reactive-pipes';
 
 const NZ_MODULES = [
-  NzFormModule,
-  NzToolTipModule,
-  NzIconModule,
-  NzBadgeModule,
-  NzInputModule,
-  NzCheckboxModule
+  NzFormModule, NzToolTipModule, NzIconModule, NzBadgeModule,
+  NzInputModule, NzDatePickerModule, NzCheckboxModule
 ];
 const APP_DECORATIONS_COMPONENTS = [
   ReactiveLabelComponent,
@@ -34,7 +32,8 @@ const APP_DECORATIONS_COMPONENTS = [
 const APP_REACTIVE_COMPONENTS = [
   AppReactiveAbstractComponent,
   ReactiveInputComponent,
-  ReactiveCheckBoxComponent
+  ReactiveCheckBoxComponent,
+  ReactiveDatePickerComponent
 ];
 
 @NgModule({
@@ -52,8 +51,7 @@ const APP_REACTIVE_COMPONENTS = [
   exports: [
     CommonModule,
     ReactiveFormsModule,
-    ...APP_REACTIVE_COMPONENTS,
-  ]
+    ...APP_REACTIVE_COMPONENTS]
 })
 export class AppReactiveFormsModule {
 }

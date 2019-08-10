@@ -4,3 +4,4 @@ export * from './additional-decorations/sub-label';
 
 export * from './reactive-input';
 export * from './reactive-check-box';
+export * from './reactive-date-picker';
