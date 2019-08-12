@@ -1,0 +1,29 @@
+<div class="animated fadeIn" [ngSwitch]="type">
+  <app-reactive-date-picker *ngSwitchCase="'date-picker'"
+                            [fieldId]="fieldId"
+                            [placeholder]="placeholder"
+                            [label]="label"
+                            [control]="control"
+                            [tooltipMessage]="tooltipMessage"
+                            [subLabel]="subLabel">
+  </app-reactive-date-picker>
+  <app-reactive-input *ngSwitchCase="'input'"
+                      [fieldId]="fieldId"
+                      [control]="control"
+                      [onInputDirective]="onInputDirective"
+                      [pipeOption]="pipeOption"
+                      [label]="label"
+                      [placeholder]="placeholder"
+                      [tooltipMessage]="tooltipMessage"
+                      [maxLength]="maxLength"
+                      [subLabel]="subLabel">
+  </app-reactive-input>
+  <app-reactive-check-box *ngSwitchCase="'check-box'"
+                          [fieldId]="fieldId"
+                          [control]="control"
+                          [label]="label"
+                          [placeholder]="placeholder"
+                          [tooltipMessage]="tooltipMessage"
+                          [subLabel]="subLabel">
+  </app-reactive-check-box>
+</div>

@@ -1,6 +1,4 @@
-<label *ngIf="label"
-       class="label"
-       [for]="fieldId"> {{label}}
+<label *ngIf="label" class="mb-0" [for]="fieldId"> {{label}}
   <span class="text-nowrap">
     <span *ngIf="hasRequiredIndicator" class="required">*</span>
     <i *ngIf="tooltipMessage"

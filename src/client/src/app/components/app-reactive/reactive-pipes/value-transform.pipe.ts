@@ -8,7 +8,7 @@ export class ValueTransformPipe implements PipeTransform {
 
   transform(value: any, option: string = 'default'): string {
 
-    if (!value) {
+    if (!value && value !== 0) {
       return '';
     }
 

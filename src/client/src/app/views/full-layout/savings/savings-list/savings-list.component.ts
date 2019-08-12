@@ -1,12 +1,10 @@
 import { ChangeDetectionStrategy, Component, OnInit } from '@angular/core';
-import { FormControl, FormGroup, Validators }         from '@angular/forms';
 import { Saving, ExchangeRate, Currency }             from '@shared/models';
-import { markAllFormFieldsAsTouched }                 from '@components/app-reactive/reactive-functions/validation';
-import { pick }                                       from 'lodash';
+import { pick }                                       from 'lodash-es';
 import { SavingsAbstract }                            from '../savings-abstract';
 
 const SAVINGS_TABLE_HEADERS = {
-  dateSeconds: {label: 'Date', type: 'seconds', isSortable: true},
+  datePrepared: {label: 'Date', type: 'date', isSortable: true},
   currencyCode: {label: 'Currency', isSortable: true},
   type: {label: 'Type', isSortable: true},
   amount: {label: 'Amount', type: 'rounded-number', isSortable: true},
@@ -16,7 +14,17 @@ const SAVINGS_TABLE_HEADERS = {
   totalToday: {label: 'Total Today', type: 'rounded-number', isSortable: true},
   diff: {label: 'Diff', type: 'rounded-number', isSortable: true}
 };
-const SHORT_HEADERS_LIST = ['dateSeconds', 'currencyCode', 'type', 'amount'];
+const SHORT_HEADERS_LIST = ['datePrepared', 'currencyCode', 'type', 'amount'];
+const ADD_EDIT_FORM = [
+  {fieldId: 'datePrepared', label: 'Date', type: 'date-picker', isRequired: true, rowPosition: 12},
+  {fieldId: 'currencyCode', label: 'Currency Code', type: 'input', isRequired: true, rowPosition: 4},
+  {fieldId: 'currencyNumber', label: 'Currency Number', type: 'input', isRequired: true, rowPosition: 4},
+  {fieldId: 'currencyName', label: 'Currency Name', type: 'input', isRequired: true, rowPosition: 4},
+  {fieldId: 'type', label: 'Type', type: 'input', isRequired: true, rowPosition: 12},
+  {fieldId: 'amount', label: 'Amount', type: 'input', isRequired: true, rowPosition: 12},
+  {fieldId: 'exchangeRate', label: 'Exchange Rate', type: 'input', isRequired: true, rowPosition: 12},
+  {fieldId: 'exchangeRateToday', label: 'Exchange Rate for Today', type: 'input', isRequired: true, rowPosition: 12}
+];
 
 @Component({
   selector: 'app-dashboard',
@@ -27,23 +35,13 @@ export class SavingsListComponent extends SavingsAbstract implements OnInit {
 
   headersFull = SAVINGS_TABLE_HEADERS;
   headersShort = pick(SAVINGS_TABLE_HEADERS, SHORT_HEADERS_LIST);
-  fullMode = false;
 
+  fullMode = false;
+  isSubmitted = false;
+
+  savingAddEditForm = ADD_EDIT_FORM;
   savingsList: Saving[] = [];
   exchangeRate = new ExchangeRate();
-
-  savingAddForm = new FormGroup({
-    date: new FormControl(null, Validators.required),
-    currency: new FormGroup({
-      code: new FormControl(null, Validators.required),
-      number: new FormControl(null, Validators.required),
-      name: new FormControl(null, Validators.required)
-    }),
-    type: new FormControl(null, Validators.required),
-    amount: new FormControl(null, Validators.required),
-    exchangeRate: new FormControl(null, Validators.required),
-    exchangeRateToday: new FormControl(null, Validators.required)
-  });
 
   ngOnInit() {
     this.getSavings();
@@ -56,7 +54,7 @@ export class SavingsListComponent extends SavingsAbstract implements OnInit {
       .subscribe(res => {
         this.savingsList = res && res.length ? res.map(x => ({
           ...x,
-          dateSeconds: x['date']['seconds'],
+          datePrepared: x['date']['seconds'] * 1000,
           currencyCode: x['currency']['code'],
           total: x['amount'] * x['exchangeRate'],
           totalToday: x.amount * x.exchangeRateToday,
@@ -82,10 +80,7 @@ export class SavingsListComponent extends SavingsAbstract implements OnInit {
       });
   }
 
-  addSaving() {
-    if (this.savingAddForm.valid) {
-    } else {
-      markAllFormFieldsAsTouched(this.savingAddForm)
-    }
+  addSaving(e) {
+    console.log(e);
   }
 }
