@@ -2,21 +2,21 @@ import { ChangeDetectionStrategy, Component, OnInit } from '@angular/core';
 import { FormControl, FormGroup, Validators }         from '@angular/forms';
 import { Saving, ExchangeRate, Currency }             from '@shared/models';
 import { markAllFormFieldsAsTouched }                 from '@components/app-reactive/reactive-functions/validation';
+import { pick }                                       from 'lodash';
 import { SavingsAbstract }                            from '../savings-abstract';
 
-const SAVINGS_TABLE = {
-  headers: {
-    dateSeconds: {label: 'Date', type: 'seconds', isSortable: true},
-    currencyCode: {label: 'Currency', isSortable: true},
-    type: {label: 'Type', isSortable: true},
-    amount: {label: 'Amount', type: 'rounded-number', isSortable: true},
-    exchangeRate: {label: 'Rate', type: 'rounded-number', isSortable: true},
-    total: {label: 'Total', type: 'rounded-number', isSortable: true},
-    exchangeRateToday: {label: 'Rate Today', type: 'rounded-number', isSortable: true},
-    totalToday: {label: 'Total Today', type: 'rounded-number', isSortable: true},
-    diff: {label: 'Diff', type: 'rounded-number', isSortable: true}
-  }
+const SAVINGS_TABLE_HEADERS = {
+  dateSeconds: {label: 'Date', type: 'seconds', isSortable: true},
+  currencyCode: {label: 'Currency', isSortable: true},
+  type: {label: 'Type', isSortable: true},
+  amount: {label: 'Amount', type: 'rounded-number', isSortable: true},
+  exchangeRate: {label: 'Rate', type: 'rounded-number', isSortable: true},
+  total: {label: 'Total', type: 'rounded-number', isSortable: true},
+  exchangeRateToday: {label: 'Rate Today', type: 'rounded-number', isSortable: true},
+  totalToday: {label: 'Total Today', type: 'rounded-number', isSortable: true},
+  diff: {label: 'Diff', type: 'rounded-number', isSortable: true}
 };
+const SHORT_HEADERS_LIST = ['dateSeconds', 'currencyCode', 'type', 'amount'];
 
 @Component({
   selector: 'app-dashboard',
@@ -25,7 +25,9 @@ const SAVINGS_TABLE = {
 })
 export class SavingsListComponent extends SavingsAbstract implements OnInit {
 
-  headers = SAVINGS_TABLE['headers'];
+  headersFull = SAVINGS_TABLE_HEADERS;
+  headersShort = pick(SAVINGS_TABLE_HEADERS, SHORT_HEADERS_LIST);
+  fullMode = false;
 
   savingsList: Saving[] = [];
   exchangeRate = new ExchangeRate();
