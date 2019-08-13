@@ -1,7 +1,14 @@
 <div *ngIf="!isLoading" class="animated fadeIn card">
   <div class="card-body pt-4">
-    <h4 class="text-primary">Savings</h4>
-    <app-complex-table [headers]="headers"
+    <div class="d-flex">
+      <h4 class="text-primary">Savings</h4>
+      <button nz-button nzType="primary" nzSize="small"
+              class="ml-auto align-self-start"
+              (click)="fullMode =!fullMode">
+        {{fullMode ? 'Less' : 'More'}} details
+      </button>
+    </div>
+    <app-complex-table [headers]="fullMode ? headersFull : headersShort"
                        [listOfInitialData]="savingsList"
                        [addFormTmp]="newSavingTmp"
                        (onAddItem)="addSaving()">
