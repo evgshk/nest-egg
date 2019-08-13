@@ -1,5 +1,7 @@
 import { ChangeDetectionStrategy, Component, OnInit } from '@angular/core';
-import { Saving, ExchangeRate }                       from '@shared/models';
+import { FormControl, FormGroup, Validators }         from '@angular/forms';
+import { Saving, ExchangeRate, Currency }             from '@shared/models';
+import { markAllFormFieldsAsTouched }                 from '@components/app-reactive/reactive-functions/validation';
 import { SavingsAbstract }                            from '../savings-abstract';
 
 const SAVINGS_TABLE = {
@@ -19,14 +21,27 @@ const SAVINGS_TABLE = {
 @Component({
   selector: 'app-dashboard',
   changeDetection: ChangeDetectionStrategy.OnPush,
-  templateUrl: 'savings.component.html'
+  templateUrl: 'savings-list.component.html'
 })
-export class SavingsComponent extends SavingsAbstract implements OnInit {
+export class SavingsListComponent extends SavingsAbstract implements OnInit {
 
   headers = SAVINGS_TABLE['headers'];
-  savingsList: Saving[] = [];
 
+  savingsList: Saving[] = [];
   exchangeRate = new ExchangeRate();
+
+  savingAddForm = new FormGroup({
+    date: new FormControl(null, Validators.required),
+    currency: new FormGroup({
+      code: new FormControl(null, Validators.required),
+      number: new FormControl(null, Validators.required),
+      name: new FormControl(null, Validators.required)
+    }),
+    type: new FormControl(null, Validators.required),
+    amount: new FormControl(null, Validators.required),
+    exchangeRate: new FormControl(null, Validators.required),
+    exchangeRateToday: new FormControl(null, Validators.required)
+  });
 
   ngOnInit() {
     this.getSavings();
@@ -63,5 +78,12 @@ export class SavingsComponent extends SavingsAbstract implements OnInit {
           diff: x.amount * x.exchangeRateToday - x.amount * x.exchangeRate
         }));
       });
+  }
+
+  addSaving() {
+    if (this.savingAddForm.valid) {
+    } else {
+      markAllFormFieldsAsTouched(this.savingAddForm)
+    }
   }
 }

@@ -11,6 +11,7 @@ import { NzDropDownModule }      from 'ng-zorro-antd/dropdown';
 import { NzRadioModule }         from 'ng-zorro-antd/radio';
 import { NzIconModule }          from 'ng-zorro-antd/icon';
 import { NzToolTipModule }       from 'ng-zorro-antd/tooltip';
+import { NzModalModule }         from 'ng-zorro-antd/modal';
 import { ComplexTableComponent } from './complex-table.component';
 import { SettingsListModule }    from './settitgs-list/settings-list.module';
 import { NumberToFixedPipe }     from './pipes';
@@ -23,7 +24,8 @@ import {
 const FILTERS_LIST = [FilterListComponent, FilterDateRangeComponent, FilterSearchTextComponent];
 const ANT_DESIGN_MODULES = [
   NzButtonModule, NzCheckboxModule, NzDatePickerModule, NzDropDownModule,
-  NzInputModule, NzTableModule, NzRadioModule, NzIconModule, NzToolTipModule
+  NzInputModule, NzTableModule, NzRadioModule, NzIconModule, NzToolTipModule,
+  NzModalModule
 ];
 
 @NgModule({

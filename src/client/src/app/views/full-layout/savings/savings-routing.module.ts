@@ -1,9 +1,9 @@
 import { NgModule }             from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
-import { SavingsComponent }     from './savings/savings.component';
+import { SavingsListComponent } from './savings-list/savings-list.component';
 
 export const routes: Routes = [
-  {path: '', component: SavingsComponent}
+  {path: '', component: SavingsListComponent}
 ];
 
 @NgModule({

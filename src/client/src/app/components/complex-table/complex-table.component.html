@@ -1,13 +1,21 @@
-<div class="d-flex flex-row-reverse mb-2">
-  <app-settings-list [(settingsList)]="settingsList"></app-settings-list>
+<div class="d-flex mb-2">
+  <button nz-button nzType="primary" nzSize="small"
+          nz-tooltip nzTitle="Add new item"
+          class="ml-auto"
+          (click)="isAddModalVisible = true">
+    <i nz-icon nzType="plus-circle" nzTheme="outline"></i>
+  </button>
   <nz-radio-group nz-tooltip nzTitle="Items number on a page"
                   nzSize="small" nzButtonStyle="solid"
+                  class="ml-2"
                   [(ngModel)]="pageSize">
-    <label nz-radio-button [nzValue]="10" (click)="paginationHandle(true)">10</label>
-    <label nz-radio-button [nzValue]="20" (click)="paginationHandle(true)">20</label>
-    <label nz-radio-button [nzValue]="50" (click)="paginationHandle(true)">50</label>
-    <label nz-radio-button [nzValue]="100" (click)="paginationHandle(true)">100</label>
+    <label *ngFor="let quantity of [10, 20, 50, 100]"
+           nz-radio-button
+           [nzValue]="quantity"
+           (click)="paginationHandle(true)">{{quantity}}
+    </label>
   </nz-radio-group>
+  <app-settings-list [(settingsList)]="settingsList"></app-settings-list>
 </div>
 <nz-table *ngIf="settingsList else noDataTmp"
           nzSize="small" nzBordered nzNoResult="No data"
@@ -82,6 +90,16 @@
   </tr>
   </tbody>
 </nz-table>
+
+<nz-modal nzTitle="Add from"
+          [nzStyle]="{top: '20px'}"
+          [nzBodyStyle]="{'overflow-y': 'auto', 'height': '460px'}"
+          [nzWidth]="500"
+          [(nzVisible)]="isAddModalVisible"
+          (nzOnCancel)="isAddModalVisible = false"
+          (nzOnOk)="addItem()">
+  <ng-container [ngTemplateOutlet]="addFormTmp"></ng-container>
+</nz-modal>
 
 
 <ng-template #noDataTmp>

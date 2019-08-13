@@ -5,17 +5,10 @@
                       [tooltipMessage]="tooltipMessage">
   </app-reactive-label>
   <nz-form-control [nzValidateStatus]="validationErrors ? 'error' : null">
-    <nz-input-group [nzPrefixIcon]="icon" [nzCompact]="true">
-      <input [id]="fieldId"
-             [formControl]="control"
-             [value]="control.value | valueTransform : pipeOption"
-             [type]="inputType"
-             [placeholder]="placeholder || ''"
-             [maxLength]="maxLength || 500000"
-             [OnInputValueControl]="onInputDirective"
-             class="w-100"
-             nz-input/>
-    </nz-input-group>
+    <nz-date-picker [id]="fieldId"
+                    [formControl]="control"
+                    [nzClassName]="'w-100'">
+    </nz-date-picker>
   </nz-form-control>
   <app-validation-message [validationErrors]="validationErrors"></app-validation-message>
   <app-reactive-am-sub-label [subLabel]="subLabel"></app-reactive-am-sub-label>
