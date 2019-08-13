@@ -14,6 +14,7 @@ const routes: Routes = [
     children: [
       {path: 'dashboard', loadChildren: () => import('./views/full-layout/dashboard/dashboard.module').then(m => m.DashboardModule)},
       {path: 'savings', loadChildren: () => import('./views/full-layout/savings/savings.module').then(m => m.SavingsModule)},
+      {path: 'stocks', loadChildren: () => import('./views/full-layout/stocks/stocks.module').then(m => m.StocksModule)},
       {path: 'user', loadChildren: () => import('./views/full-layout/user/user.module').then(m => m.UserModule)},
     ]
   },

@@ -58,6 +58,20 @@
           <ng-container *ngSwitchCase="'seconds'">{{item[settingItem.id] * 1000 | date: 'shortDate'}}</ng-container>
           <ng-container *ngSwitchCase="'date'">{{item[settingItem.id] | date: 'shortDate'}}</ng-container>
           <ng-container *ngSwitchCase="'rounded-number'">{{item[settingItem.id] | numberToFixed: 2}}</ng-container>
+          <ng-container *ngSwitchCase="'diff'">
+            <ng-container *ngIf="item[settingItem.id]>0">
+                <div class="text-success">
+                    <i nz-icon nzType="caret-up" nzTheme="outline"></i>
+                    {{item[settingItem.id] | numberToFixed: 2}}
+                </div>
+            </ng-container>
+            <ng-container *ngIf="item[settingItem.id]<0">
+                <div class="text-danger">
+                    <i nz-icon nzType="caret-down" nzTheme="outline"></i>
+                    {{item[settingItem.id] | numberToFixed: 2}}
+                </div>
+            </ng-container>
+          </ng-container>
           <ng-container *ngSwitchCase="'rubles'">
             {{item[settingItem.id] | currency:'RUB':'symbol':'4.2-2':'ru'}}
           </ng-container>
