@@ -51,6 +51,7 @@
         </div>
       </th>
     </ng-container>
+    <th nzWidth="1%" class="text-center">Actions</th>
   </tr>
   </thead>
   <tbody>
@@ -63,7 +64,6 @@
     <ng-container *ngFor="let settingItem of settingsList">
       <td *ngIf="settingItem['isShown']" class="text-{{settingItem.align}}">
         <ng-container [ngSwitch]="headers[settingItem.id].type">
-          <ng-container *ngSwitchCase="'seconds'">{{item[settingItem.id] * 1000 | date: 'shortDate'}}</ng-container>
           <ng-container *ngSwitchCase="'date'">{{item[settingItem.id] | date: 'shortDate'}}</ng-container>
           <ng-container *ngSwitchCase="'rounded-number'">{{item[settingItem.id] | numberToFixed: 2}}</ng-container>
           <ng-container *ngSwitchCase="'diff'">
@@ -87,21 +87,32 @@
         </ng-container>
       </td>
     </ng-container>
+    <td class="text-center">
+      <i nz-icon nzType="edit" nzTheme="outline" class="cursor-pointer"
+         (click)="editItem(item)">
+      </i>
+      <nz-divider nzType="vertical"></nz-divider>
+      <i nz-icon nzType="delete" nzTheme="outline" class="cursor-pointer"
+         (click)="deleteItem(item)">
+      </i>
+    </td>
   </tr>
   </tbody>
 </nz-table>
 
-<nz-modal nzTitle="Add from"
+<nz-modal nzTitle="Item menu"
           [nzStyle]="{top: '20px'}"
-          [nzBodyStyle]="{'overflow-y': 'auto', 'height': '460px'}"
+          [nzBodyStyle]="{'overflow-y': 'auto', 'height': '470px'}"
           [nzWidth]="500"
           [(nzVisible)]="isAddModalVisible"
           (nzOnCancel)="isAddModalVisible = false"
-          (nzOnOk)="addItem()">
-  <ng-container [ngTemplateOutlet]="addFormTmp"></ng-container>
+          (nzOnOk)="isAddEditSubmitted = true">
+  <app-reactive-fields-list *ngIf="isAddModalVisible"
+                            [fieldsList]="addEditForm"
+                            [(isSubmitted)]="isAddEditSubmitted"
+                            (onValidForm)="onAddEditItem($event)">
+  </app-reactive-fields-list>
 </nz-modal>
-
-
 <ng-template #noDataTmp>
   <p class="text-center text-warning">
     <i class="fa fa-clock-o mr-1"></i> No data to display

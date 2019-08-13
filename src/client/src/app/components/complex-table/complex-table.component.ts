@@ -1,5 +1,5 @@
-import { ChangeDetectionStrategy, Component, EventEmitter, Input, OnChanges, Output, TemplateRef } from '@angular/core';
-import { includes }                                                                                from 'lodash-es';
+import { ChangeDetectionStrategy, Component, EventEmitter, Input, OnChanges, Output } from '@angular/core';
+import { includes }                                                                   from 'lodash-es';
 
 @Component({
   selector: 'app-complex-table',
@@ -12,8 +12,10 @@ export class ComplexTableComponent implements OnChanges {
   @Input() headers = {};
   @Input() listOfInitialData = [];
   @Input() hasIdNavigation = false;
-  @Input() addFormTmp: TemplateRef<string>;
-  @Output() onAddItem = new EventEmitter();
+  @Input() addEditForm = [];
+  @Input() isAddEditSubmitted = false;
+  @Output() isAddEditSubmittedChange = new EventEmitter();
+  @Output() addEditItem = new EventEmitter();
 
   filterConditionsList = [];
   settingsList = [];
@@ -42,8 +44,17 @@ export class ComplexTableComponent implements OnChanges {
     this.paginationHandle();
   }
 
-  addItem() {
-    this.onAddItem.emit();
+  onAddEditItem(e) {
+    this.addEditItem.emit(e);
+  }
+
+  editItem(item) {
+    this.addEditForm = this.addEditForm.map(x => ({...x, value: item[x['fieldId']]}));
+    this.isAddModalVisible = true;
+  }
+
+  deleteItem(item) {
+    console.log(item);
   }
 
   onFilter(prop, list, type) {

@@ -10,50 +10,9 @@
     </div>
     <app-complex-table [headers]="fullMode ? headersFull : headersShort"
                        [listOfInitialData]="savingsList"
-                       [addFormTmp]="newSavingTmp"
-                       (onAddItem)="addSaving()">
+                       [addEditForm]="savingAddEditForm"
+                       [(isAddEditSubmitted)]="isSubmitted"
+                       (addEditItem)="addSaving($event)">
     </app-complex-table>
   </div>
 </div>
-
-
-<ng-template #newSavingTmp>
-  <app-reactive-date-picker fieldId="date" label="Date"
-                            [control]="savingAddForm.get('date')">
-  </app-reactive-date-picker>
-  <div class="row">
-    <div class="col">
-      <app-reactive-input fieldId="currencyCode" label="Currency Code"
-                          [control]="savingAddForm.get('currency').get('code')">
-      </app-reactive-input>
-    </div>
-    <div class="col">
-      <app-reactive-input fieldId="currencyNumber" label="Currency Number"
-                          [control]="savingAddForm.get('currency').get('number')">
-      </app-reactive-input>
-    </div>
-    <div class="col">
-      <app-reactive-input fieldId="currencyName" label="Currency Name"
-                          [control]="savingAddForm.get('currency').get('name')">
-      </app-reactive-input>
-    </div>
-  </div>
-  <app-reactive-input fieldId="type" label="Type"
-                      [control]="savingAddForm.get('type')">
-  </app-reactive-input>
-  <app-reactive-input fieldId="amount" label="amount"
-                      [control]="savingAddForm.get('amount')">
-  </app-reactive-input>
-  <div class="row">
-    <div class="col">
-      <app-reactive-input fieldId="exchangeRate" label="Exchange Rate"
-                          [control]="savingAddForm.get('exchangeRate')">
-      </app-reactive-input>
-    </div>
-    <div class="col">
-      <app-reactive-input fieldId="exchangeRateToday" label="Exchange Rate for Today"
-                          [control]="savingAddForm.get('exchangeRateToday')">
-      </app-reactive-input>
-    </div>
-  </div>
-</ng-template>

@@ -1,0 +1,17 @@
+<div class="row">
+  <div *ngFor="let item of fieldsList" class="col-md{{item['rowPosition'] ? '-' + item['rowPosition'] : 12}}">
+    <app-reactive-fields-switcher [type]="item['type']"
+                                  [fieldId]="item['fieldId']"
+                                  [control]="formGroup.get(item['fieldId'])"
+                                  [placeholder]="item['placeholder']"
+                                  [label]="item['label']"
+                                  [onInputDirective]="item['directive'] || ''"
+                                  [pipeOption]="item['pipeOption'] || ''"
+                                  [maxLength]="item['maxLength']"
+                                  [itemsList]="item['itemsList']"
+                                  [tooltipMessage]="item['tooltipMessage']"
+                                  [subLabel]="item['subLabel']"
+                                  [maxItems]="item['maxItems'] || 5">
+    </app-reactive-fields-switcher>
+  </div>
+</div>
